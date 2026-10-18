@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{ $title }}</h1>
-
-    @if (session('status'))
-        <div class="alert alert-success">{{ session('status') }}</div>
-    @endif
+    <div class="d-flex justify-content-between mb-3">
+        <h1>{{ $title }}</h1>
+        <a href="{{ route('flights.create') }}" class="btn btn-success align-self-center">
+            + Добавить рейс
+        </a>
+    </div>
 
     <form method="GET" action="{{ route('flights.index') }}" class="row g-2 mb-3">
         <div class="col-auto">
@@ -16,7 +17,6 @@
                 placeholder="Номер рейса"
             >
         </div>
-
         <div class="col-auto">
             <button class="btn btn-secondary">Найти</button>
         </div>
@@ -32,6 +32,7 @@
                 <th>Места</th>
                 <th>Цена</th>
                 <th>Международный</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -44,10 +45,25 @@
                     <td>{{ $flight->seats }}</td>
                     <td>{{ number_format((float) $flight->ticket_price, 0, ',', ' ') }} ₸</td>
                     <td>{{ $flight->is_international ? 'Да' : 'Нет' }}</td>
+                    <td class="text-end text-nowrap">
+                        <a href="{{ route('flights.edit', $flight) }}"
+                           class="btn btn-sm btn-outline-primary">
+                            Изменить
+                        </a>
+
+                        <form method="POST"
+                              action="{{ route('flights.destroy', $flight) }}"
+                              class="d-inline"
+                              onsubmit="return confirm('Удалить рейс?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-outline-danger">Удалить</button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7">Рейсы не найдены.</td>
+                    <td colspan="8">Рейсы не найдены.</td>
                 </tr>
             @endforelse
         </tbody>

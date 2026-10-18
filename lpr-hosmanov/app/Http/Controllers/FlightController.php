@@ -2,77 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FlightRequest;
+use App\Models\Airport;
 use App\Models\Flight;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class FlightController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request): View
-{
-    $query = Flight::with('airport');
+    {
+        $query = Flight::with('airport');
 
-    if ($search = $request->query('q')) {
-        $query->where('number', 'like', "%{$search}%");
+        if ($search = $request->query('q')) {
+            $query->where('number', 'like', "%{$search}%");
+        }
+
+        $query->latest();
+
+        return view('flights.index', [
+            'title' => 'Расписание рейсов',
+            'flights' => $query->paginate(5)->withQueryString(),
+        ]);
     }
 
-    // Для N = 18 сортировка: сначала новые
-    $query->latest();
-
-    return view('flights.index', [
-        'title' => 'Расписание рейсов',
-        'flights' => $query->paginate(5)->withQueryString(),
-    ]);
-}
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('flights.form', [
+            'title' => 'Новый рейс',
+            'flight' => new Flight(),
+            'airports' => Airport::orderBy('code')->get(),
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(FlightRequest $request): RedirectResponse
     {
-        //
+        $flight = Flight::create($request->validated());
+
+        return redirect()
+            ->route('flights.index')
+            ->with('status', "Добавлен рейс {$flight->number}.");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Flight $flight)
+    public function edit(Flight $flight): View
     {
-        //
+        return view('flights.form', [
+            'title' => 'Редактирование рейса',
+            'flight' => $flight,
+            'airports' => Airport::orderBy('code')->get(),
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Flight $flight)
+    public function update(FlightRequest $request, Flight $flight): RedirectResponse
     {
-        //
+        $flight->update($request->validated());
+
+        return redirect()
+            ->route('flights.index')
+            ->with('status', "Изменения рейса {$flight->number} сохранены.");
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Flight $flight)
+    public function destroy(Flight $flight): RedirectResponse
     {
-        //
-    }
+        $number = $flight->number;
+        $flight->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Flight $flight)
-    {
-        //
+        return redirect()
+            ->route('flights.index')
+            ->with('status', "Рейс {$number} удалён.");
     }
 }
