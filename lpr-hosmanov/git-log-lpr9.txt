@@ -1,0 +1,108 @@
+﻿78c6197 ╨Ы╨Я╨а9: CRUD ╤А╨╡╨╣╤Б╨╛╨▓ ╨╕ ╨▓╨░╨╗╨╕╨┤╨░╤Ж╨╕╤П
+ .../app/Http/Controllers/FlightController.php      | 93 +++++++++++-----------
+ lpr-hosmanov/app/Http/Requests/FlightRequest.php   | 72 +++++++++++++++++
+ .../resources/views/flights/form.blade.php         | 90 +++++++++++++++++++++
+ .../resources/views/flights/index.blade.php        | 30 +++++--
+ 4 files changed, 230 insertions(+), 55 deletions(-)
+79d60b7 ╨Ы╨Я╨а9 ╨┐.4: ╤Б╨┐╨╕╤Б╨╛╨║ ╤А╨╡╨╣╤Б╨╛╨▓ ╤Б ╨┐╨╛╨╕╤Б╨║╨╛╨╝ ╨╕ ╨┐╨░╨│╨╕╨╜╨░╤Ж╨╕╨╡╨╣
+ .../app/Http/Controllers/FlightController.php      | 78 ++++++++++++++++++++++
+ lpr-hosmanov/app/Providers/AppServiceProvider.php  |  5 +-
+ .../resources/views/flights/index.blade.php        | 57 ++++++++++++++++
+ lpr-hosmanov/routes/web.php                        |  2 +
+ 4 files changed, 140 insertions(+), 2 deletions(-)
+a58d5e0 ╨Ы╨Я╨а9 ╨┐.3: ╨╝╨╕╨│╤А╨░╤Ж╨╕╤П, ╤Д╨░╨▒╤А╨╕╨║╨╕ ╨╕ ╤В╨╡╤Б╤В╨╛╨▓╤Л╨╡ ╨┤╨░╨╜╨╜╤Л╨╡
+ lpr-hosmanov/app/Models/Flight.php                 | 15 ++++++-----
+ lpr-hosmanov/database/factories/AirportFactory.php | 12 ++-------
+ lpr-hosmanov/database/factories/FlightFactory.php  | 20 +++++++--------
+ ..._18_151030_add_description_to_flights_table.php | 30 ++++++++++++++++++++++
+ lpr-hosmanov/database/seeders/DatabaseSeeder.php   | 21 +++++++--------
+ 5 files changed, 58 insertions(+), 40 deletions(-)
+da050f3 ╨Ы╨Я╨а9 ╨┐.2: ╨╝╨╕╨│╤А╨░╤Ж╨╕╨╕ ╨╕ ╨╝╨╛╨┤╨╡╨╗╨╕ ╨░╤Н╤А╨╛╨┐╨╛╤А╤В╨╛╨▓ ╨╕ ╤А╨╡╨╣╤Б╨╛╨▓
+ lpr-hosmanov/app/Models/Airport.php                | 19 ++++++++++++
+ lpr-hosmanov/app/Models/Flight.php                 | 35 ++++++++++++++++++++++
+ lpr-hosmanov/database/factories/AirportFactory.php | 24 +++++++++++++++
+ lpr-hosmanov/database/factories/FlightFactory.php  | 24 +++++++++++++++
+ .../2026_10_18_145245_create_airports_table.php    | 26 ++++++++++++++++
+ .../2026_10_18_145248_create_flights_table.php     | 35 ++++++++++++++++++++++
+ 6 files changed, 163 insertions(+)
+4ea7900 ╨Ф╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╛ git-log-lpr.txt
+ lpr-hosmanov/git-log-lpr8.txt | Bin 0 -> 10642 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+6f260a5 ╨Ы╨Я╨а8 ╨┐.5: Blade-╤И╨░╨▒╨╗╨╛╨╜╤Л ╨╕ ╨┐.6 POST-╤Д╨╛╤А╨╝╨░
+ .../app/Http/Controllers/PageController.php        | 17 ++++-
+ .../resources/views/catalog/index.blade.php        | 73 ++++++++++++++++++++++
+ .../resources/views/catalog/show.blade.php         | 34 ++++++++++
+ lpr-hosmanov/resources/views/feedback.blade.php    | 25 ++++++++
+ lpr-hosmanov/resources/views/layouts/app.blade.php | 37 +++++++++++
+ lpr-hosmanov/routes/web.php                        | 10 ++-
+ 6 files changed, 193 insertions(+), 3 deletions(-)
+98af247 ╨Ы╨Я╨а8 ╨┐.4: ╨║╨╛╨╜╤В╤А╨╛╨╗╨╗╨╡╤А ╨║╨░╤В╨░╨╗╨╛╨│╨░
+ .../app/Http/Controllers/CatalogController.php     | 133 +++++++++++++++++++++
+ .../app/Http/Controllers/PageController.php        |  10 ++
+ .../resources/views/catalog/index.blade.php        |   0
+ .../resources/views/catalog/show.blade.php         |   0
+ lpr-hosmanov/resources/views/layouts/app.blade.php |   0
+ lpr-hosmanov/routes/web.php                        |  27 ++++-
+ 6 files changed, 167 insertions(+), 3 deletions(-)
+d2e395c ╨Ы╨Я╨а8 ╨┐.1: ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ Laravel
+ lpr-hosmanov/.editorconfig                         |   18 +
+ lpr-hosmanov/.env.example                          |   65 +
+ lpr-hosmanov/.gitattributes                        |   11 +
+ lpr-hosmanov/.gitignore                            |   27 +
+ lpr-hosmanov/.npmrc                                |    2 +
+ lpr-hosmanov/AGENTS.md                             |   47 +
+ lpr-hosmanov/CLAUDE.md                             |   47 +
+ lpr-hosmanov/README.md                             |   58 +
+ lpr-hosmanov/app/Http/Controllers/Controller.php   |    8 +
+ lpr-hosmanov/app/Models/User.php                   |   32 +
+ lpr-hosmanov/app/Providers/AppServiceProvider.php  |   24 +
+ lpr-hosmanov/artisan                               |   18 +
+ lpr-hosmanov/bootstrap/app.php                     |   21 +
+ lpr-hosmanov/bootstrap/cache/.gitignore            |    2 +
+ lpr-hosmanov/bootstrap/providers.php               |    7 +
+ lpr-hosmanov/composer.json                         |   86 +
+ lpr-hosmanov/composer.lock                         | 8381 ++++++++++++++++++++
+ lpr-hosmanov/config/app.php                        |  126 +
+ lpr-hosmanov/config/auth.php                       |  117 +
+ lpr-hosmanov/config/cache.php                      |  136 +
+ lpr-hosmanov/config/database.php                   |  184 +
+ lpr-hosmanov/config/filesystems.php                |   80 +
+ lpr-hosmanov/config/lab.php                        |    8 +
+ lpr-hosmanov/config/logging.php                    |  140 +
+ lpr-hosmanov/config/mail.php                       |  118 +
+ lpr-hosmanov/config/queue.php                      |  129 +
+ lpr-hosmanov/config/services.php                   |   38 +
+ lpr-hosmanov/config/session.php                    |  233 +
+ lpr-hosmanov/database/.gitignore                   |    1 +
+ lpr-hosmanov/database/factories/UserFactory.php    |   45 +
+ .../0001_01_01_000000_create_users_table.php       |   49 +
+ .../0001_01_01_000001_create_cache_table.php       |   35 +
+ .../0001_01_01_000002_create_jobs_table.php        |   59 +
+ lpr-hosmanov/database/seeders/DatabaseSeeder.php   |   25 +
+ lpr-hosmanov/package.json                          |   19 +
+ lpr-hosmanov/phpunit.xml                           |   36 +
+ lpr-hosmanov/public/.htaccess                      |   25 +
+ lpr-hosmanov/public/favicon.ico                    |    0
+ lpr-hosmanov/public/index.php                      |   20 +
+ lpr-hosmanov/public/robots.txt                     |    2 +
+ lpr-hosmanov/resources/css/app.css                 |    9 +
+ lpr-hosmanov/resources/js/app.js                   |    1 +
+ lpr-hosmanov/resources/views/welcome.blade.php     |  223 +
+ lpr-hosmanov/routes/console.php                    |    8 +
+ lpr-hosmanov/routes/web.php                        |    7 +
+ lpr-hosmanov/storage/app/.gitignore                |    4 +
+ lpr-hosmanov/storage/app/private/.gitignore        |    2 +
+ lpr-hosmanov/storage/app/public/.gitignore         |    2 +
+ lpr-hosmanov/storage/framework/.gitignore          |   10 +
+ lpr-hosmanov/storage/framework/cache/.gitignore    |    4 +
+ .../storage/framework/cache/data/.gitignore        |    2 +
+ .../storage/framework/cache/locks/.gitignore       |    2 +
+ lpr-hosmanov/storage/framework/sessions/.gitignore |    2 +
+ lpr-hosmanov/storage/framework/testing/.gitignore  |    2 +
+ lpr-hosmanov/storage/framework/views/.gitignore    |    2 +
+ lpr-hosmanov/storage/logs/.gitignore               |    2 +
+ lpr-hosmanov/tests/Feature/ExampleTest.php         |   19 +
+ lpr-hosmanov/tests/TestCase.php                    |   10 +
+ lpr-hosmanov/tests/Unit/ExampleTest.php            |   16 +
+ lpr-hosmanov/vite.config.js                        |   24 +
+ 60 files changed, 10830 insertions(+)
