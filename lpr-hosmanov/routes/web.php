@@ -1,8 +1,10 @@
 <?php
+use App\Http\Controllers\FlightController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CatalogController;
 use Illuminate\Support\Facades\Route;
 
+Route::resource('flights', FlightController::class)->except(['show']);
 Route::get('/', fn () => redirect()->route('catalog.index'));
 Route::get('/feedback', [PageController::class, 'feedbackForm'])->name('feedback.form');
 Route::post('/feedback', [PageController::class, 'feedbackSend'])->name('feedback.send');
