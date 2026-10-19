@@ -25,13 +25,5 @@
 
         @yield('content')
     </main>
-
-    <footer class="bg-light border-top py-3 mt-4">
-        <div class="container small text-muted">
-            {{ config('lab.student') }} ({{ config('lab.group') }}, N = {{ config('lab.number') }})
-            · код занятия: <strong>{{ config('lab.code') }}</strong>
-            · {{ now()->format('d.m.Y H:i:s') }}
-        </div>
-    </footer>
 </body>
 </html>
